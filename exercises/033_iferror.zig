@@ -39,11 +39,31 @@ pub fn main() void {
             std.debug.print("={}. ", .{value});
         } else |err| switch (err) {
             MyNumberError.TooBig => std.debug.print(">4. ", .{}),
+            MyNumberError.TooSmall => std.debug.print("<4. ", .{}),
             // Please add a match for TooSmall here and have it print: "<4. "
         }
+
+        // todo: variable get expression value from catch
+        // var realValue: u8 = doSum(num);
+        // std.debug.print("{}. ", .{realValue});
     }
 
     std.debug.print("\n", .{});
+}
+
+fn doSum(num: u8) u8 {
+    var v: u8 = numberMaybeFail(num) catch |err| {
+        switch (err) {
+            MyNumberError.TooBig => {
+                std.debug.print(">4. ", .{});
+            },
+            MyNumberError.TooSmall => {
+                std.debug.print("<4. ", .{});
+            },
+        }
+        return 0;
+    };
+    return v;
 }
 
 // This time we'll have numberMaybeFail() return an error union rather
