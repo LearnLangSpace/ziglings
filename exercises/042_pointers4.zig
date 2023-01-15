@@ -15,7 +15,7 @@ const std = @import("std");
 
 pub fn main() void {
     var num: u8 = 1;
-    var more_nums = [_]u8{ 1, 1, 1, 1 };
+    var more_nums = [_]u8{ 1, 1, 1, 1 }; // array
 
     // Let's pass a reference to num to our function and print it:
     makeFive(&num);
@@ -37,5 +37,5 @@ pub fn main() void {
 // This function should take a reference to a u8 value and set it
 // to 5.
 fn makeFive(x: *u8) void {
-    ??? = 5; // fix me!
+    x.* = 5; // fix me!
 }
